@@ -1,8 +1,16 @@
 import axios from 'axios'
 
 export function fetchWeather(data){
-    let appid= '10785b7930ad9b19367b1419c07f8dd3'
+    let key= '1df21f1270514720982153616212210'
     let q='Brest'
-    return axios.get(`pro.openweathermap.org/data/2.5/forecast/hourly?q=${q}&appid=${appid}`) 
-    
+    if(data.key){
+        key = data.key
+    }
+    if(data.q){
+        q = data.q
+    }
+    return axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${q}&days=4&aqi=no&alerts=no`) 
+   
 }
+
+// https://api.weatherapi.com/v1/forecast.json?key=1df21f1270514720982153616212210&q=$Brest&days=4&aqi=no&alerts=no

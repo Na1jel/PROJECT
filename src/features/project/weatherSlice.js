@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {fetchWeather} from './weatherAPI';
 
 const initialState  = {
-    value: [],
+    weather: {},
     status: 'idle',
 }
 
@@ -26,12 +26,12 @@ export const weatherSlice = createSlice({
             })
             .addCase(weatherAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-                state.value = action.payload;
+                state.weather = action.payload;
             })
     }
 })
 
-export const selectWeather = (state) => state.value;
+export const selectWeather = (state) => state.weather.weather;
 
 
 export default weatherSlice.reducer;

@@ -1,24 +1,49 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {selectWeather, weatherAsync} from './weatherSlice'
 
-export function Weather(){
-    const weathers = useSelector(selectWeather)
-    console.log(weathers)
+
+export function Weather({
+        center,
+        zoom,
+      }: {
+        center: google.maps.LatLngLiteral;
+        zoom: number;
+      } ){
+      
+        const ref = useRef();
+    const weather = useSelector(selectWeather)
+    console.log(weather)
     const dispatch = useDispatch();
-    const [q, setQ] = useState('Brest')
 
     useEffect(()=>{
-        dispatch(weatherAsync)
-    }, [ dispatch])
+        dispatch(weatherAsync({query : 'Brest'}))
+    }, [dispatch])
 
-    return(
-        <div>
-            {
-                // weathers.weather.map(w=>{
-                //     <p>{w.main.temp}</p>
-                // })
-            }
+    useEffect(() => {
+        new window.google.maps.Map(ref.current, {
+          center,
+          zoom,
+        });
+      });
+
+    if(Object.keys(weather).length){
+        return( <div>
+  <input type='text'></input>
+            <p>{weather.location.name}</p>
+            <div ref={ref} id="map" />
         </div>
-    )
+          
+        )
+    }else{
+        return(
+            <h1>error</h1>
+        )
+    }  
 }
+
+
+git hub = https://github.com/googlemaps/react-wrapper/blob/main/examples/basic.tsx
+npm maps = https://www.npmjs.com/package/@googlemaps/react-wrapper
+docimentation = https://developers.google.com/maps/documentation/javascript/react-map
+console = https://console.cloud.google.com/appengine/start/reception?project=lunar-reef-330320&hl=ru

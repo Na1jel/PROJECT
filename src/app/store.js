@@ -4,7 +4,7 @@ import weatherReducer from '../features/project/weatherSlice';
 
 export const store = configureStore({
   reducer: {
-    weathers: weatherReducer,
+    weather: weatherReducer,
     counter: counterReducer,
   },
 });

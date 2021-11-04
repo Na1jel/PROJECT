@@ -1,33 +1,28 @@
 import React from 'react';
 import {Weather} from './features/project/Weather'
 import './App.css';
-import { Wrapper, Status} from "@googlemaps/react-wrapper";
-import { Spinner } from './features/project/Spiner';
-import { ErrorComponent } from './features/project/ErrorComponent';
+import { Wrapper} from "@googlemaps/react-wrapper";
+import { Marker } from './features/project/Marker';
 
 
 // const render = (status) => {
-//   switch (status) {
-//     case status === Status.LOADING:
-//       return <Spinner />;
-//     case status === Status.FAILURE:
-//       return <ErrorComponent />;
-//     case status === Status.SUCCESS:
-//       return <Weather />;
-//   }
+//   if (status === Status.LOADING) return <h3>{status} ..</h3>;
+//   if (status === Status.FAILURE) return <h3>{status} ...</h3>;
+//   return null;
 // };
-const render = (status: Status): ReactElement => {
-  if (status === Status.LOADING) return <Spinner />;
-  if (status === Status.FAILURE) return <ErrorComponent />;
-  return null;
-};
+
 
 function App() {
+  const center = { lat: -34.397, lng: 150.644 };
+  const zoom = 4;
+
+
+  
   return (
-    <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"}  render = { render } >
-    <div className="App">
-      <Weather/>
-    </div>
+    <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"} >
+      <Weather center={center} zoom={zoom}>
+        <Marker />
+      </Weather>
     </Wrapper > 
   );
 }

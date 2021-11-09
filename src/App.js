@@ -11,11 +11,10 @@ function App() {
   const [center, setCenter] = useState({lat:0, lng:0})
 
   const onClick = (e) => {
-    setClicks([...clicks,   !window.maps.MapMouseEvent.e.latLng.lng()]);
-    
+    setClicks([...clicks,   {lat: e.lat(), lng: e.lng()}]);
   };
   
-
+  // console.log(clicks)
 
   return (
     <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"} >
@@ -26,8 +25,8 @@ function App() {
         zoom={zoom}
         style={{ flexGrow: '1', height: '100%' }}
         >
-          {clicks.map((latLng, i) => (
-            <Marker position={{ lat: 9.761927, lng: 79.95244 }} />
+          {clicks.map((latlng,  i) => (
+            <Marker key={i} latlng={ latlng}   />
            ))}
       </Map>
     </Wrapper > 

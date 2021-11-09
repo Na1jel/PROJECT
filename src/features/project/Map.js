@@ -3,6 +3,7 @@ import "./style/styleMap.css"
 
 export function Map({
     zoom, 
+    onClick,
     center,
     children
 }){
@@ -29,17 +30,14 @@ export function Map({
   function coordinates (e) {
     let late = e.latLng.lat()
     let lnge = e.latLng.lng()
- 
-    setLat(late)
-    setLng(lnge)
-    // console.log(lng)
+    onClick(e.latLng)
   }
 
   return (
     <div>
-      <div ref={ref} id="map" onChange={coordinates} />
+      <div ref={ref} id="map"  />
       <form>
-        <input type='text'/> 2
+        <input type='number' name="lat" onChange={coordinates}  /> 
       </form>
        { React.Children.map( children,(child) => {
         return React.cloneElement(child, { map }); }

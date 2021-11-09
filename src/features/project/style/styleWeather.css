@@ -1,0 +1,5 @@
+.weather{
+    height: 230px;
+    display: flex;
+    justify-content: center;
+}

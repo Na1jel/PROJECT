@@ -1,24 +1,29 @@
-import React, { useEffect,  } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWeather, weatherAsync } from './weatherSlice'
-
-
-
-
-
+import './style/styleWeather.css'
 
 export function Weather() {
   const weather = useSelector(selectWeather)
   const dispatch = useDispatch();
+  const coordinatesWeather = useState({lat: 0, lon:0})
+  const nameWeather = useState({name:''})
+  console.log( nameWeather)
  
   useEffect(() => {
-    dispatch(weatherAsync({ query: 'Brest' }))
+    dispatch(weatherAsync({ lat: 18.4, lon: 76.58 }))
   }, [dispatch])
+
+  function search(e){
+    console.log(e.target.value)
+  }
 
 if(Object.keys(weather).length){
     return (
-     <div>
-      <input type='text'/>
+     <div className='weather'>
+       <form>
+      <input type='text' value={nameWeather.name} onChange={search} />
+      </form>
       {weather.location.name}
      </div>
 
@@ -29,12 +34,4 @@ if(Object.keys(weather).length){
        
       )
     }
-  
 }
-
-
-
-// git hub = https://github.com/googlemaps/react-wrapper/blob/main/examples/basic.tsx
-// npm maps = https://www.npmjs.com/package/@googlemaps/react-wrapper
-// docimentation = https://developers.google.com/maps/documentation/javascript/react-map
-// console = https://console.cloud.google.com/appengine/start/reception?project=lunar-reef-330320&hl=ru

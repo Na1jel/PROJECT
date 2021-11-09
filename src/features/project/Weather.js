@@ -1,60 +1,34 @@
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useEffect,  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWeather, weatherAsync } from './weatherSlice'
-import "./style/styleMap.css"
 
 
 
 
 
-export function Weather({
-  center,
-  zoom,
-}) {
+
+export function Weather() {
   const weather = useSelector(selectWeather)
   const dispatch = useDispatch();
-  const [map, setMap] = useState(false);
-  const ref = useRef();
-  
-  useEffect(() => {
-    console.log('map')
-    setMap(new window.google.maps.Map(ref.current, {
-      center :{ lat: 41.85, lng: -87.64 },
-      zoom,
-    }));
-  },[ref, zoom]);
  
-  useEffect(() => {
-    if (map) {
-      window.google.maps.event.clearListeners(map, 'click');
-      map.addListener("click", coordinates);
-    }
-  },[map])
-
-
   useEffect(() => {
     dispatch(weatherAsync({ query: 'Brest' }))
   }, [dispatch])
 
-
-  function coordinates (e) {
-    console.log(e.latLng.lat(), e.latLng.lng())
-  }
-
-
-// if(Object.keys(weather).length){
+if(Object.keys(weather).length){
     return (
-      <div>
-        <div ref={ref} id="map" onChange={coordinates} />
-      </div>)
+     <div>
+      <input type='text'/>
+      {weather.location.name}
+     </div>
 
-    // )}else{
-    //   return(<div>
-    //     <div>Error</div>
-    //     <div ref={ref} id="re" />
-    //     </div>
-    //   )
-    // }
+    )}else{
+      return(
+  
+        <div>Error</div>
+       
+      )
+    }
   
 }
 

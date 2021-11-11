@@ -7,22 +7,27 @@ export function Weather() {
   const weather = useSelector(selectWeather)
   const dispatch = useDispatch();
   const coordinatesWeather = useState({lat: 0, lon:0})
-  const nameWeather = useState({name:''})
-  console.log( nameWeather)
+  const [nameWeather, setNameWeather] = useState('')
+ 
  
   useEffect(() => {
     dispatch(weatherAsync({ lat: 18.4, lon: 76.58 }))
   }, [dispatch])
 
   function search(e){
-    console.log(e.target.value)
+    setNameWeather(e.target.value)
+    console.log('qwe:',nameWeather)
   }
 
+  function onSubmit(e){
+    e.preventDefault();
+  
+  }
 if(Object.keys(weather).length){
     return (
      <div className='weather'>
-       <form>
-      <input type='text' value={nameWeather.name} onChange={search} />
+       <form onSubmit={onSubmit}>
+      <input type='text' value={nameWeather} onChange={search} />
       </form>
       {weather.location.name}
      </div>
@@ -31,7 +36,6 @@ if(Object.keys(weather).length){
       return(
   
         <div>Error</div>
-       
       )
     }
 }

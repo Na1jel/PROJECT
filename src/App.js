@@ -4,11 +4,12 @@ import './App.css';
 import { Wrapper} from "@googlemaps/react-wrapper";
 import { Marker } from './features/project/Marker';
 import { Map } from './features/project/Map';
+import Three from './features/project/Three';
 
 function App() {
   const [clicks, setClicks] = useState([])
-  const [zoom, setZoom] = useState(4)
-  const [center, setCenter] = useState({lat:0, lng:0})
+  const [zoom] = useState(4)
+  const [center] = useState({lat:0, lng:0})
 
   const onClick = (e) => {
     setClicks([...clicks,   {lat: e.lat(), lng: e.lng()}]);
@@ -19,6 +20,7 @@ function App() {
   return (
     <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"} >
       <Weather />
+      <Three/>
       <Map 
         center={center}
         onClick={onClick}

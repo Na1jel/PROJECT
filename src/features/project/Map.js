@@ -1,22 +1,22 @@
 import React, { useEffect, useRef,useState } from 'react';
 import "./style/styleMap.css"
 
+
 export function Map({
     zoom, 
     onClick,
-    center,
     children
 }){
     const [map, setMap] = useState(false);
-    const [lat, setLat] = useState([])
-    const [lng, setLng] = useState([])
     const ref = useRef();
+    
 
     useEffect(() => {
         console.log('map')
         setMap(new window.google.maps.Map(ref.current, {
           center :{ lat: 52.1, lng: 23.7 },
           zoom,
+          addMapType: 'G_SATELLITE_3D_MAP'
         }));
       },[ref, zoom]);
        
@@ -28,8 +28,7 @@ export function Map({
   },[map])
 
   function coordinates (e) {
-    let late = e.latLng.lat()
-    let lnge = e.latLng.lng()
+
     onClick(e.latLng)
   }
 
@@ -37,7 +36,7 @@ export function Map({
     <div>
       <div ref={ref} id="map"  />
       <form>
-        <input type='number' name="lat" onChange={coordinates}  /> 
+        <input type='number' name="lat"  onChange={coordinates}/> 
       </form>
        { React.Children.map( children,(child) => {
         return React.cloneElement(child, { map }); }

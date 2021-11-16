@@ -2,6 +2,8 @@ import React, { useEffect, useRef,useState } from 'react';
 import "./style/styleMap.css"
 
 
+
+
 export function Map({
     zoom, 
     onClick,
@@ -16,7 +18,8 @@ export function Map({
         setMap(new window.google.maps.Map(ref.current, {
           center :{ lat: 52.1, lng: 23.7 },
           zoom,
-          addMapType: 'G_SATELLITE_3D_MAP'
+          // addMapType: 'G_SATELLITE_3D_MAP'
+          mapTypeId: window.google.maps.MapTypeId.ROADMAP
         }));
       },[ref, zoom]);
        
@@ -43,3 +46,8 @@ export function Map({
        )}
     </div>)
 }
+
+
+//https://www.npmjs.com/package/canvas#loadimage
+//https://gist.github.com/viktorkelemen/1451945
+//https://coderoad.ru/5706129/HTML5-Canvas-%D0%BC%D0%B5%D1%82%D0%BA%D0%B0-%D0%B4%D0%BB%D1%8F-Google-Maps-API-v3

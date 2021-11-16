@@ -5,6 +5,8 @@ import { Wrapper} from "@googlemaps/react-wrapper";
 import { Marker } from './features/project/Marker';
 import { Map } from './features/project/Map';
 import Three from './features/project/Three';
+import Canvas from './features/project/Canvas';
+
 
 function App() {
   const [clicks, setClicks] = useState([])
@@ -20,6 +22,7 @@ function App() {
   return (
     <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"} >
       <Weather />
+      <Canvas/>
       <Three/>
       <Map 
         center={center}

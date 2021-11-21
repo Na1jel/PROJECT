@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {fetchWeather} from './weatherAPI';
+import {fetchWeather, fetchCity} from './weatherAPI';
+
 
 const initialState  = {
     value: {},
@@ -8,12 +9,11 @@ const initialState  = {
 
 export const weatherAsync = createAsyncThunk(
     'weather/fetchWeather',
-    async(data)=>{
-        const response = await fetchWeather(data);
+    async(city)=>{
+        const response = await fetchWeather(city);
         return response.data
     }
 )
-
 
 export const weatherSlice = createSlice({
     name: 'weather',
@@ -32,6 +32,7 @@ export const weatherSlice = createSlice({
 })
 
 export const selectWeather = (state) => state.weather.value;
+
 
 
 export default weatherSlice.reducer;

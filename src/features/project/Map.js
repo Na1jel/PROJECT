@@ -1,9 +1,6 @@
 import React, { useEffect, useRef,useState } from 'react';
 import "./style/styleMap.css"
 
-
-
-
 export function Map({
     zoom, 
     onClick,
@@ -31,7 +28,6 @@ export function Map({
   },[map])
 
   function coordinates (e) {
-
     onClick(e.latLng)
   }
 
@@ -44,6 +40,7 @@ export function Map({
        { React.Children.map( children,(child) => {
         return React.cloneElement(child, { map }); }
        )}
+      
     </div>)
 }
 

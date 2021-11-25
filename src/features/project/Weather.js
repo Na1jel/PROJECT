@@ -3,17 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectWeather, weatherAsync, selectCity} from './weatherSlice'
 import './style/styleWeather.css'
 
-export function Weather({clicks}) {
+export function Weather({click}) {
   const weather = useSelector(selectWeather)
-  // const name = useSelector(selectCity)
   const dispatch = useDispatch();
-  const coordinatesWeather = useState({lat: 0, lon:0})
   const [city, setCity] = useState('')
- console.log("lox", clicks)
+//  console.log("lox", click)
+
+  const lat = click.map(lat=> lat.lat)
+  const lon = click.map(lon=> lon.lng)
+  const coordinatesWeather = {
+    lat: lat,
+    lon: lon
+  }
+  console.log(coordinatesWeather)
   
   useEffect(() => {
-    dispatch(weatherAsync(city))
-  }, [dispatch, city])
+    dispatch(weatherAsync(coordinatesWeather))
+  }, [dispatch, coordinatesWeather])
 
 
   function onSubmit(e){

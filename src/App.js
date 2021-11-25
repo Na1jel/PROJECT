@@ -4,7 +4,7 @@ import './App.css';
 import { Wrapper} from "@googlemaps/react-wrapper";
 import { Marker } from './features/project/Marker';
 import { Map } from './features/project/Map';
-// import Three from './features/project/Three';
+import Three from './features/project/Three';
 // import Canvas from './features/project/Canvas';
 
 
@@ -20,11 +20,10 @@ function App() {
   // console.log(clicks)
 
   return (
-    <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"} >
-      
+    <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"}>
       <Weather click = {clicks} />
-      {/* <Canvas/>  */}
-      {/* <Three/> */}
+       {/* <Canvas/>   */}
+       <Three /> 
        <Map 
         center={center}
         onClick={onClick}

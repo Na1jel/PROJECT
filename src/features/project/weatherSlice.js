@@ -9,8 +9,8 @@ const initialState  = {
 
 export const weatherAsync = createAsyncThunk(
     'weather/fetchWeather',
-    async(city)=>{
-        const response = await fetchWeather(city);
+    async(coordinatesWeather)=>{
+        const response = await fetchWeather(coordinatesWeather);
         return response.data
     }
 )

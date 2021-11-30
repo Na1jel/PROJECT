@@ -1,11 +1,9 @@
 .weather{
     display: grid;
-    grid-template-columns: 25% 50%; 
+    grid-template-columns: 50% 50%; 
     background: linear-gradient(90deg, #b9deed, #efefef) ;
     }
-.search{
-    grid-column: 2/3;
-}
+
 .search input{
     border: 1px solid rgb(138, 138, 235);
     border-radius: 0.7em;

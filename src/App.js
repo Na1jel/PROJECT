@@ -20,10 +20,9 @@ function App() {
   // console.log(clicks)
 
   return (
+    <div className='styleWeather'>
     <Wrapper apiKey={"AIzaSyDZaOYq8-wsulwTlpwqfCLX2hp4HcPPx7c"}>
-      <Weather click = {clicks} />
        {/* <Canvas/>   */}
-       <Three /> 
        <Map 
         center={center}
         onClick={onClick}
@@ -34,7 +33,10 @@ function App() {
             <Marker key={i} latlng={ latlng}   />
            ))}
       </Map>
+      <Weather click = {clicks} />
+      <Three />
     </Wrapper > 
+    </div>
   );
 }
 export default App;

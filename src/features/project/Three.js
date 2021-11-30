@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as THREE from "three"
-import CSS3DRender from "three-css3drenderer"
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 

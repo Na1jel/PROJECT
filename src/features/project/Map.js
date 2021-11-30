@@ -1,6 +1,6 @@
 import React, { useEffect, useRef,useState } from 'react';
 import "./style/styleMap.css"
-import Canvas from './Canvas'
+// import Canvas from './Canvas'
 
 export function Map({
     zoom, 
@@ -11,11 +11,9 @@ export function Map({
     const ref = useRef();
     
     useEffect(() => {
-        console.log('map')
         setMap(new window.google.maps.Map(ref.current, {
           center :{ lat: 52.1, lng: 23.7 },
           zoom,
-          // addMapType: 'G_SATELLITE_3D_MAP'
           mapTypeId: window.google.maps.MapTypeId.ROADMAP
         }));
       },[ref, zoom]);
@@ -30,16 +28,14 @@ export function Map({
   function coordinates (e) {
     onClick(e.latLng)
   }
-
   return (
     <div>
-     
       <div ref={ref} id="map"  />
-      <form>
-        <input type='number' name="lat"  onChange={coordinates}/> 
-      </form>
        { React.Children.map( children,(child) => {
-        return React.cloneElement(child, { map }); }
+         if(child){
+          return React.cloneElement(child, { map });
+         }
+         }
        )}
      
     </div>)

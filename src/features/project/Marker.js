@@ -1,21 +1,29 @@
 import  {useState, useEffect} from "react"; 
+import { selectWeather} from './weatherSlice';
+import { useSelector } from 'react-redux';
+// import Loader from "react-js-loader";
 
 
-export function Marker ( {latlng, options, map}){
+export function Marker ( {position, options, map}){
     const [marker, setMarker] = useState()
+    const weather = useSelector(selectWeather)
+    // console.log("pos",position)
     
     useEffect(() => {
-        if (!marker) {
-          setMarker(new window.google.maps.Marker({
-            position:  { lat: latlng.lat, lng: latlng.lng }, 
-            map,  
-            title: `LAT: ${latlng.lat} LNG: ${latlng.lng}`, 
-          }));
-        }
+      // console.log('weather:', weather)
+
+      console.log('POS:', position)
+      if (!marker) {
+        setMarker(new window.google.maps.Marker({
+          position, 
+          map,  
+          title: ``, 
+        }))}
+    
         return () => {
             if (marker) {
               marker.setMap(null);
-            
+             
             }
           };
         }, [marker]);

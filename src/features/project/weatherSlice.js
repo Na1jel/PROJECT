@@ -5,6 +5,7 @@ import {fetchWeather} from './weatherAPI';
 const initialState  = {
     value: {},
     status: 'idle',
+    position:{},
 }
 
 export const weatherAsync = createAsyncThunk(
@@ -18,7 +19,11 @@ export const weatherAsync = createAsyncThunk(
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState ,
-    reducers:{},
+    reducers:{
+        setPosition: (state, position)=>{
+            state.position = position
+        }
+    },
     extraReducers:(builder)=>{
         builder
             .addCase(weatherAsync.pending, (state)=>{
@@ -30,7 +35,8 @@ export const weatherSlice = createSlice({
             })
     }
 })
-
+export const {position} = weatherSlice.actions;
+export const selectPosition = (state) => state.weather.position;
 export const selectWeather = (state) => state.weather.value;
 
 

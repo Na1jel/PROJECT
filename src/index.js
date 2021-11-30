@@ -5,6 +5,7 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import html2canvas from 'html2canvas';
 
 ReactDOM.render(
   <React.StrictMode>

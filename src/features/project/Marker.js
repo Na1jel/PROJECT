@@ -1,37 +1,27 @@
 import  {useState, useEffect} from "react"; 
-import { selectWeather} from './weatherSlice';
-import { useSelector } from 'react-redux';
-// import Loader from "react-js-loader";
+import Modal from "./Modal";
 
+export function Marker (options) {
+  const [marker, setMarker] = useState();
 
-export function Marker ( {position, options, map}){
-    const [marker, setMarker] = useState()
-    const weather = useSelector(selectWeather)
-    // console.log("pos",position)
-    
-    useEffect(() => {
-      // console.log('weather:', weather)
+  useEffect(() => {
+    if (!marker) {
+      setMarker(new window.google.maps.Marker());
+    }
 
-      console.log('POS:', position)
-      if (!marker) {
-        setMarker(new window.google.maps.Marker({
-          position, 
-          map,  
-          title: ``, 
-        }))}
-    
-        return () => {
-            if (marker) {
-              marker.setMap(null);
-             
-            }
-          };
-        }, [marker]);
+    // remove marker from map on unmount
+    return () => {
+      if (marker) {
+        marker.setMap(null);
+      }
+    };
+  }, [marker]);
 
-        useEffect(() => {
-          if (marker) {
-            marker.setOptions(options);
-          }
-        }, [marker, options, ]);
+  useEffect(() => {
+    if (marker) {
+      marker.setOptions(options);
+    }
+  }, [marker, options]);
+
   return null;
-} 
+};

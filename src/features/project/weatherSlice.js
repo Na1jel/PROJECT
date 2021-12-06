@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {fetchWeather} from './weatherAPI';
+import {fetchWeather, searchWeather} from './weatherAPI';
 
 
 const initialState  = {
@@ -16,6 +16,13 @@ export const weatherAsync = createAsyncThunk(
     }
 )
 
+export const searchWeatherAsync = createAsyncThunk(
+    'weather/searchWeather',
+    async(city)=>{
+        const response = await searchWeather(city);
+        return response.date
+    }
+) 
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState ,
@@ -33,12 +40,19 @@ export const weatherSlice = createSlice({
                 state.status = 'idle';
                 state.value = action.payload;
             })
+            .addCase(searchWeatherAsync.pending, (state)=>{
+                state.status = 'loading'
+            })
+            .addCase(searchWeatherAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.value = action.payload;
+            })
     }
 })
-export const {position} = weatherSlice.actions;
+
 export const selectPosition = (state) => state.weather.position;
 export const selectWeather = (state) => state.weather.value;
-
+export const searchSelectWeather = (state) => state.weather.value
 
 
 export default weatherSlice.reducer;

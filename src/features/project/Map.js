@@ -1,45 +1,41 @@
 import React, { useEffect, useRef,useState } from 'react';
 import "./style/styleMap.css"
-// import Canvas from './Canvas'
 
-export function Map({
-    zoom, 
-    onClick,
-    children
-}){
-    const [map, setMap] = useState(false);
+
+
+
+export function Map ({onClick,children,center, zoom}) {
+     const [map, setMap] = useState(false);
     const ref = useRef();
-    
+
     useEffect(() => {
         setMap(new window.google.maps.Map(ref.current, {
-          center :{ lat: 52.1, lng: 23.7 },
+          center ,
           zoom,
-          mapTypeId: window.google.maps.MapTypeId.ROADMAP
         }));
       },[ref, zoom]);
-       
+
   useEffect(() => {
     if (map) {
-      window.google.maps.event.clearListeners(map, 'click');
-      map.addListener("click", coordinates);
-    }
-  },[map])
+      ["click"].forEach((eventName) =>
+        window.google.maps.event.clearListeners(map, eventName)
+      );
 
-  function coordinates (e) {
-    onClick(e.latLng)
-  }
-  return (
-    <div>
-      <div ref={ref} id="map"  />
-       { React.Children.map( children,(child) => {
-         if(child){
+      if (onClick) {
+        map.addListener("click", onClick);
+      }
+    }
+  }, [map, onClick]);
+return (
+  <div>
+     <div ref={ref} id="map" />
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
           return React.cloneElement(child, { map });
-         }
-         }
-       )}
-     
-    </div>)
-}
+        }
+      })}
+  </div>)
+};
 
 
 //https://www.npmjs.com/package/canvas#loadimage

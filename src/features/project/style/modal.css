@@ -1,0 +1,56 @@
+.modal{
+    background: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+}
+.modal__content{
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #b9deed, #efefef) ;
+   
+}
+.ModalH{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: consolas;
+    font-size: 2,5em;
+}
+.ModalP{
+    color: wheat;
+    font-size: 25px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.ModalBtn{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    border-radius: 12px;
+    font-size: 17px;
+    font-family: consolas;
+    color: rgb(0, 0, 0);
+    background-image: linear-gradient(to right, #15226e 0%, #706c8d 51%, #bd9fda 100%);
+    -webkit-box-shadow: 7px -12px 67px 54px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 7px -12px 67px 54px rgba(34, 60, 80, 0.2);
+    box-shadow: 7px -12px 67px 54px rgba(34, 60, 80, 0.2);
+    padding: 13px 25px;
+}
+.ModalBtn:hover{
+    background-position: right center;
+}
+.listWeather{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+    grid-auto-rows: minmax(100px, auto);
+    font-family: consolas;
+}
+.weatherDate{
+    font-size: 1.5em;
+}
+.weatherInfo{
+    font-size: 21px;
+}

@@ -1,41 +1,30 @@
 import React, { useEffect, useState,  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWeather, weatherAsync} from './weatherSlice'
+import Modal from "./Modal"
 import "./style/styleWeather.css"
 
 
-export function Weather({coordinatesWeather}) {
+export function Weather({coordinatesWeather, onClick}) {
   const weather = useSelector(selectWeather)
   const dispatch = useDispatch();
-  const [city, setCity] = useState('')
-  console.log('coord',coordinatesWeather)
- 
+
+  const [modalActive, setModalActive] = useState (true)
+  console.log(onClick)
   useEffect(() => {
     dispatch(weatherAsync(coordinatesWeather))
   }, [dispatch,coordinatesWeather])
 
-  
-  function onSubmit(e){
-    e.preventDefault();
-  
+  function open(){
+    setModalActive(true)
+  }
+  function close(){
+    setModalActive(false)
   }
 
-if(Object.keys(weather).length){
+if(Object.keys(weather).length && onClick){
     return (
-    <div className='weather'>
-     <div className='search'>
-      </div>
-      <div className='info'>
-        City:{weather.location.name}
-        <h3>Weacher day</h3>
-        <ul>
-        {weather.forecast.forecastday.map(d =>
-              <li key={d.date}> Date: {d.date} <br/> ОТ {d.day.mintemp_c} - До {d.day.maxtemp_c} <br/> <img src={d.day.condition.icon}></img></li>
-            )}
-        </ul>
-        
-      </div>
-    </div>
+        <Modal open={open} close={close}/>
     )}else{
       return(
         <div className="loader"> 
